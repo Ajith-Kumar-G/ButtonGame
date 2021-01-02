@@ -17,6 +17,8 @@ import java.util.Random;
     Button b[]=new Button[n*n];
     Button start,reset,restart;
     String msg="";
+    timecalc total;
+    int totalTime;
 
     public buttondrag()
     {
@@ -53,6 +55,7 @@ import java.util.Random;
          reset.addActionListener(this);
          restart.addActionListener(this);
          restart.setEnabled(false);
+         reset.setEnabled(false);
          //restart.setVisible(false);
          Component[] com = buttonPanel.getComponents();
         for (int a = 0; a < com.length; a++) 
@@ -61,22 +64,29 @@ import java.util.Random;
 
     public void actionPerformed(ActionEvent ae) 
     {
+        
         if(ae.getSource()==start && (!doneFlag))
         {
             Component[] com = buttonPanel.getComponents();
             for (int a = 0; a < com.length; a++) 
             com[a].setEnabled(true);
             shuffleStart();
+            reset.setEnabled(true);
+            total=new timecalc();
         }
         else
         if(ae.getSource()==reset  && (!doneFlag) )
         {
             reSet();
+            totalTime=0;
+            reset.setEnabled(false);
         }
         else
         if(ae.getSource()==restart  && (doneFlag) )
         {
             reStart();
+            totalTime=0;
+            reset.setEnabled(true);
         }
      {
         for(int i=0;i<m;i++)
@@ -110,12 +120,14 @@ import java.util.Random;
        }
        if(checkComI==8)
         {
+          totalTime=total.getTimeInSeconds();
           for(int i=0;i<m;i++)
              b[i].setVisible(false);
           doneFlag=true;
           restart.setEnabled(true);
           restart.setVisible(true);
-          msg="Congradulations!, you Finished it!! ";
+          reset.setEnabled(false);
+          msg="Congradulations!, you Finished it in "+ totalTime+ " seconds !!";
           repaint();
          }    
      
@@ -130,7 +142,7 @@ import java.util.Random;
         else
             setBackground(Color.WHITE);
         g.setFont(new Font("Serif", Font.PLAIN, 24));
-        g.drawString(msg,60,250);
+        g.drawString(msg,30,250);
     }
     public void shuffleStart()
     {
@@ -190,6 +202,16 @@ class MyWindowAdapter extends WindowAdapter
         System.exit(0);
      }
 } 
+class timecalc
+{
+    private final long startedMillis = System.currentTimeMillis();
+
+    public int getTimeInSeconds()
+    {
+        long nowMillis = System.currentTimeMillis();
+        return (int)((nowMillis - this.startedMillis) / 1000);
+    }
+}
 
 
 
