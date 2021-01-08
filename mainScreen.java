@@ -10,7 +10,7 @@ import java.util.Random;
 import ButtonDrag.*;
 import winAdapt.*;
 
-class mainScreen implements ActionListener
+public class mainScreen implements ActionListener
 {
 	private int n=2;
 	JFrame login,mF;
