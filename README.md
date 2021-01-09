@@ -7,3 +7,4 @@ Its a simple button game in JAVA(used Swing)
 - Main Screen
 - List of games
         - Memory Sequence, Number Arraging, and others Coming soon!
+
