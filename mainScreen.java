@@ -22,6 +22,7 @@ public class mainScreen implements ActionListener
 	String uName="";
 	JButton submit;	
 	Boolean loginDone=false;
+	
 	public void loginGame()
 	{
 		login=new JFrame("Login");
@@ -37,10 +38,11 @@ public class mainScreen implements ActionListener
 		login.setVisible(true);
 		login.setLayout(new FlowLayout());
 	}
-	public void startGame()
+	public void startGame(String name)
 	{
 		mF=new JFrame("Brain Teaser");
 		JLabel user;
+		uName=name;
 		mF.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		mF.setLayout(new BorderLayout());
 		mF.add(welcome,BorderLayout.NORTH);
@@ -68,9 +70,8 @@ public class mainScreen implements ActionListener
 
 	public void startGame1()
 	{
-			ButtonDrag.buttondrag cd=new ButtonDrag.buttondrag();
+			ButtonDrag.buttondrag cd=new ButtonDrag.buttondrag(uName);
        		cd.setSize(new Dimension(500,500));
-       		cd.setTitle("Button Game");
         	cd.setVisible(true);
 	}
 	public void actionPerformed(ActionEvent ae) 
@@ -80,7 +81,7 @@ public class mainScreen implements ActionListener
     		uName=userName.getText();
     		loginDone=true;
     		login.setVisible(false);
-    		this.startGame();
+    		this.startGame(uName);
     	}
 
     	if(ae.getSource() == buttonGame1)
