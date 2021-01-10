@@ -3,21 +3,28 @@ package ButtonGame;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Collections;
+import javax.swing.event.*;  
 import javax.swing.*;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.util.Random;
 import ButtonDrag.*;
 import winAdapt.*;
+import Spinner.*;
 
 public class mainScreen implements ActionListener
 {
 	private int n=2;
+	int spinValue=4;
 	JFrame login,mF;
 	JPanel welcome = new JPanel();
 	JPanel gamePanel = new JPanel();
 	JPanel userPanel = new JPanel();
+	JPanel innerGamePanel1 = new JPanel();
+	JPanel innerGamePanel2 = new JPanel();
 	JButton buttonGame1,buttonGame2;
+	Spinner.spinner s1=new Spinner.spinner(3);
+    Spinner.spinner s2=new Spinner.spinner(4); 
 	JTextField userName;
 	String uName="";
 	JButton submit;	
@@ -56,8 +63,14 @@ public class mainScreen implements ActionListener
         buttonGame1.setPreferredSize(new Dimension(300, 100));
         buttonGame2.setPreferredSize(new Dimension(300, 100));
         mF.setResizable(false);
-        gamePanel.add(buttonGame1);
-        gamePanel.add(buttonGame2);
+       	innerGamePanel1.setLayout(new FlowLayout());
+        innerGamePanel1.add(buttonGame1);
+        innerGamePanel1.add(s1.spinner);
+        innerGamePanel2.setLayout(new FlowLayout());
+        innerGamePanel2.add(buttonGame2);
+        innerGamePanel2.add(s2.spinner);
+        gamePanel.add(innerGamePanel1);
+        gamePanel.add(innerGamePanel2);
         userPanel.setLayout(new FlowLayout());
         user = new JLabel(" Name: "+uName);
         userPanel.add(user);
@@ -68,12 +81,18 @@ public class mainScreen implements ActionListener
         buttonGame2.addActionListener(this);
 	}
 
-	public void startGame1()
+	public void startGame1(int v)
 	{
-			ButtonDrag.buttondrag cd=new ButtonDrag.buttondrag(uName);
+			ButtonDrag.buttondrag cd=new ButtonDrag.buttondrag(uName,v);
        		cd.setSize(new Dimension(500,500));
         	cd.setVisible(true);
 	}
+	public void startGame2(int v)
+	{
+			MemorySeq.memorySeq cd=new MemorySeq.memorySeq(uName,v);
+       		cd.setSize(new Dimension(500,500));
+        	cd.setVisible(true);
+	}  
 	public void actionPerformed(ActionEvent ae) 
     {
     	if(ae.getSource() == submit)
@@ -87,7 +106,12 @@ public class mainScreen implements ActionListener
     	if(ae.getSource() == buttonGame1)
     	{
     		mF.setVisible(false);
-    		this.startGame1();
+    		this.startGame1(s1.getSValue());
+    	}
+    	if(ae.getSource() == buttonGame2)
+    	{
+    		mF.setVisible(false);
+    		this.startGame2(s2.getSValue());
     	}
     }
 	public static void main(String[] args)
