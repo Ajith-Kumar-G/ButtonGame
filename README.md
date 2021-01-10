@@ -1,8 +1,8 @@
-# <b style="color:green">Button Game</b>
+# <h1 style="color:green">Button Game</h1>
 Its a simple button game in JAVA(used Swing)
 
 ## <b style="color:green">To Run</b>
-<h3 class="code" style="font:serif">cmd: java ButtonGame.mainScreen</h3>
+<p class="code" >cmd: java ButtonGame.mainScreen</p>
 
 ## <b style="color:green">Features</b> 
 - Login
